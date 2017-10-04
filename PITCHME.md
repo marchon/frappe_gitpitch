@@ -129,64 +129,55 @@ Out[2]:
 
 #### `bench` - giant `fabfile`
 ```
-|-----------------------|-----------------------|-----------------------|-----------------------|
-| backup                | backup-all-sites      | config                | disable-production    |
-| backup-all-sites      | config                | disable-production    | download-translations |
-| config                | disable-production    | download-translations | get-app               |
-| disable-production    | download-translations | get-app               | init                  |
-| download-translations | get-app               | init                  | install               |
-| get-app               | init                  | install               | new-app               |
-| init                  | install               | new-app               | new-site              |
-| install               | new-app               | new-site              | prepare-staging       |
-| new-app               | new-site              | prepare-staging       | release               |
-| new-site              | prepare-staging       | release               | remote-reset-url      |
-| prepare-staging       | release               | remote-reset-url      | remote-set-url        |
-| release               | remote-reset-url      | remote-set-url        | remote-urls           |
-| remote-reset-url      | remote-set-url        | remote-urls           | remove-app            |
-| remote-set-url        | remote-urls           | remove-app            | renew-lets-encrypt    |
-| remote-urls           | remove-app            | renew-lets-encrypt    | restart               |
-| remove-app            | renew-lets-encrypt    | restart               | retry-upgrade         |
-| renew-lets-encrypt    | restart               | retry-upgrade         | set-default-site      |
-| restart               | retry-upgrade         | set-default-site      | set-mariadb-host      |
-| retry-upgrade         | set-default-site      | set-mariadb-host      | set-nginx-port        |
-| set-default-site      | set-mariadb-host      | set-nginx-port        | set-ssl-certificate   |
-| set-mariadb-host      | set-nginx-port        | set-ssl-certificate   | set-ssl-key           |
-| set-nginx-port        | set-ssl-certificate   | set-ssl-key           | set-url-root          |
-| set-ssl-certificate   | set-ssl-key           | set-url-root          | setup                 |
-| set-ssl-key           | set-url-root          | setup                 | shell                 |
-| set-url-root          | setup                 | shell                 | src                   |
-| setup                 | shell                 | src                   | start                 |
-| shell                 | src                   | start                 | switch-to-branch      |
-| src                   | start                 | switch-to-branch      | switch-to-develop     |
-| start                 | switch-to-branch      | switch-to-develop     | switch-to-master      |
-| switch-to-branch      | switch-to-develop     | switch-to-master      | update                |
-| switch-to-develop     | switch-to-master      | update                | add-to-email-queue    |
-| switch-to-master      | update                | add-to-email-queue    | build                 |
-| update                | add-to-email-queue    | build                 | build-docs            |
-| add-to-email-queue    | build                 | build-docs            | build-message-files   |
-| build                 | build-docs            | build-message-files   | bulk-rename           |
-| build-docs            | build-message-files   | bulk-rename           | clear-cache           |
-| build-message-files   | bulk-rename           | clear-cache           | clear-limits          |
-| bulk-rename           | clear-cache           | clear-limits          | clear-website-cache   |
-| clear-cache           | clear-limits          | clear-website-cache   | console               |
-| clear-limits          | clear-website-cache   | console               | destroy-all-sessions  |
-| clear-website-cache   | console               | destroy-all-sessions  | disable-scheduler     |
-| console               | destroy-all-sessions  | disable-scheduler     | disable-user          |
-| destroy-all-sessions  | disable-scheduler     | disable-user          | doctor                |
-| disable-scheduler     | disable-user          | doctor                | drop-site             |
-| disable-user          | doctor                | drop-site             | enable-scheduler      |
-| doctor                | drop-site             | enable-scheduler      | execute               |
-| drop-site             | enable-scheduler      | execute               | export-csv            |
-| enable-scheduler      | execute               | export-csv            | export-doc            |
-| execute               | export-csv            | export-doc            | export-fixtures       |
-| export-csv            | export-doc            | export-fixtures       | export-json           |
-| export-doc            | export-fixtures       | export-json           | get-untranslated      |
-| export-fixtures       | export-json           | get-untranslated      | import-csv            |
-| export-json           | get-untranslated      | import-csv            | import-doc            |
-| get-untranslated      | import-csv            | import-doc            | import-translations   |
-| import-csv            | import-doc            | import-translations   | install-app           |
-| import-doc            | import-translations   | install-app           | list-apps             |
-| import-translations   | install-app           | list-apps             | make-app              |
+| purge-jobs                 | serve                    |
+| new-language               | export-doc               |
+| make-demo                  | execute                  |
+| remove-from-installed-apps | set-default-site         |
+| clear-limits               | config                   |
+| download-translations      | get-untranslated         |
+| get-app                    | renew-lets-encrypt       |
+| set-maintenance-mode       | reset-perms              |
+| migrate                    | enable-scheduler         |
+| backup                     | build-message-files      |
+| src                        | export-fixtures          |
+| import-csv                 | restart                  |
+| set-ssl-key                | destroy-all-sessions     |
+| set-config                 | reinstall                |
+| remote-reset-url           | list-apps                |
+| set-limits                 | run-setup-wizard-ui-test |
+| setup-help                 | watch                    |
+| prepare-staging            | doctor                   |
+| start                      | remove-app               |
+| switch-to-develop          | remote-urls              |
+| import-translations        | scheduler                |
+| disable-user               | bulk-rename              |
+| shell                      | run-ui-tests             |
+| setup                      | setup-global-help        |
+| request                    | import-doc               |
+| release                    | build-docs               |
+| set-ssl-certificate        | make-app                 |
+| update                     | disable-scheduler        |
+| use                        | export-csv               |
+| backup-all-sites           | add-to-email-queue       |
+| reload-doctype             | install                  |
+| rebuild-global-search      | mysql                    |
+| restore                    | disable-production       |
+| drop-site                  | switch-to-master         |
+| remote-set-url             | update-translations      |
+| ready-for-migration        | build                    |
+| switch-to-branch           | uninstall-app            |
+| set-mariadb-host           | install-app              |
+| clear-cache                | set-admin-password       |
+| set-last-active-for-user   | trigger-scheduler-event  |
+| version                    | worker                   |
+| new-site                   | new-app                  |
+| init                       | show-pending-jobs        |
+| reload-doc                 | clear-website-cache      |
+| retry-upgrade              | publish-realtime         |
+| set-nginx-port             | add-system-manager       |
+| set-limit                  | console                  |
+| run-tests                  | set-url-root             |
+| export-json                | schedule                 |
 ```
 ---
 
