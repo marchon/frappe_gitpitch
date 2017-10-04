@@ -387,7 +387,7 @@ All tests run against current DB
 #### Backend-Frontend
 
 * RPC
-* REST API
+* [REST API](https://frappe.io/docs/user/en/guides/integration/rest_api)
 
 ```
 @frappe.whitelist()
@@ -414,3 +414,10 @@ frappe.call({
 * Bugs in tutorial
 * Broken image uploader (local)
 * [https://demo.erpnext.com](https://demo.erpnext.com)
+---
+
+### Conclusion
+
+* Huge framework
+* Nice looking
+* Lack of docs and community
