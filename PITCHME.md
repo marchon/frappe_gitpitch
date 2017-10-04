@@ -26,7 +26,7 @@ Have optional payed plans
 
 [Frappe team](https://frappe.io/about)
 
-<img src="./02-frappe-team.jpg" height="400" alt="Frappe logo">
+<img src="./assets/02-frappe-team.jpg" height="400" alt="Frappe logo">
 
 ---
 
