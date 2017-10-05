@@ -82,11 +82,11 @@ USER root
 RUN apt-get update
 RUN apt-get install -y iputils-ping
 RUN apt-get install -y git build-essential python-setuptools \
-	python-dev libffi-dev libssl-dev redis-tools \
-	software-properties-common libxrender1 libxext6 xfonts-75dpi \
-	xfonts-base libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev \
-	libwebp-dev python-tk  apt-transport-https libsasl2-dev libldap2-dev \
-	libtiff5-dev tcl8.6-dev tk8.6-dev wget
+  python-dev libffi-dev libssl-dev redis-tools \
+  software-properties-common libxrender1 libxext6 xfonts-75dpi \
+  xfonts-base libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev \
+  libwebp-dev python-tk  apt-transport-https libsasl2-dev libldap2-dev \
+  libtiff5-dev tcl8.6-dev tk8.6-dev wget
 RUN wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py
 RUN pip install --upgrade setuptools pip
 RUN useradd -ms /bin/bash frappe
@@ -273,16 +273,24 @@ Out[2]:
 
 #### ORM
 
-* soft-delete
 * Allow perform simplest queries
 * A lot of raw SQL in core
 
 ```
+# get list of objects
 frappe.get_all(
-	"ToDo",
-	fields=["name", "modified"],
-	filters = [["modified", ">", "2014-01-01"]]
+  "ToDo",
+  fields=["name", "modified"],
+  filters = [["modified", ">", "2014-01-01"]]
 )
+
+# retrieve existing
+todo = frappe.get_doc("ToDo", "ec7acf401e")
+
+# create new one
+todo = frappe.get_doc({"doctype": "ToDo", "text": "test"})
+todo.insert()
+frappe.db.commit()
 ```
 ---
 
@@ -307,29 +315,29 @@ Fat models
 
 ```
 class Item(WebsiteGenerator):
-	website = frappe._dict(
-		page_title_field = "item_name",
-		condition_field = "show_in_website",
-		template = "templates/generators/item.html",
-		no_cache = 1
-	)
-	def get_context(self, context):
-		# Context used on Item page rendering
-		context.show_search=True
-		context.search_link = '/product_search'
+  website = frappe._dict(
+    page_title_field = "item_name",
+    condition_field = "show_in_website",
+    template = "templates/generators/item.html",
+    no_cache = 1
+  )
+  def get_context(self, context):
+    # Context used on Item page rendering
+    context.show_search=True
+    context.search_link = '/product_search'
 
-		context.parents = get_parent_item_groups(self.item_group)
+    context.parents = get_parent_item_groups(self.item_group)
 
-	def validate(self):
-		super(Item, self).validate()
+  def validate(self):
+    super(Item, self).validate()
 
-		if not self.item_name:
-			self.item_name = self.item_code
+    if not self.item_name:
+      self.item_name = self.item_code
 
-		if not self.description:
-			self.description = self.item_name
+    if not self.description:
+      self.description = self.item_name
 
-		self.validate_uom()
+    self.validate_uom()
 
 ```
 ---
@@ -389,11 +397,11 @@ def get_all_roles():
 
 ```
 frappe.call({
-	//dotted path to server method
-    method: "frappe.core.doctype.user.user.get_all_roles",
-    callback: function(r) {
-        // code snippet
-    }
+  //dotted path to server method
+  method: "frappe.core.doctype.user.user.get_all_roles",
+  callback: function(r) {
+      // code snippet
+  }
 })
 ```
 ---
