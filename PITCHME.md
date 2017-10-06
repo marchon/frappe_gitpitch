@@ -277,7 +277,8 @@ Out[2]:
 * A lot of raw SQL in core
 
 ```
-# get list of objects
+# get list of objects as dicts
+# [{'name': 'First ToDo', 'modified': "2014-01-02"}]
 frappe.get_all(
   "ToDo",
   fields=["name", "modified"],
